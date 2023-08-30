@@ -87,33 +87,34 @@ struct Node
 Node* deleteNode(Node *head,int x)
 {
     //Your code here
-    Node *temp=head;
+    Node* temp=head;
+    Node* temp1;
+    int c=1;
     if(x==1)
     {
         head=head->next;
-          delete temp;
+        free(temp);
     }
     else
     {
-        temp=head;
-        Node *p;
-        int i=1;
-        while(i!=x)
+        temp1=temp->next;
+        while(temp1!=NULL)
         {
-            p=temp;
-            temp=temp->next;
-            i++;
-        }
-        if(temp->next==NULL)
-        {
-            p->next=NULL;
-            delete temp;
-        }
-        else
-        {
-            p->next=temp->next;
-            delete temp;
+            c++;
+            if(c==x)
+            {
+                temp->next=temp1->next;
+                free(temp1);
+                temp1=temp->next;
+                break;
+            }
+            else
+            {
+                temp=temp->next;
+                temp1=temp1->next;
+            }
         }
     }
     return head;
+    
 }
