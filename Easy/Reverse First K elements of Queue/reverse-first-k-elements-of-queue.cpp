@@ -15,17 +15,23 @@ class Solution
     // Function to reverse first k elements of a queue.
     queue<int> modifyQueue(queue<int> q, int k) {
         // add code here.
-        vector<int>v;
+        stack<int> st;
         int s=q.size();
-        while(s--)
+        int n=s-k;
+        while(k--)
         {
-            v.push_back(q.front());
+            st.push(q.front());
             q.pop();
         }
-        reverse(v.begin(),v.begin()+k);
-        for(int i=0;i<v.size();i++)
+        while(!st.empty())
         {
-            q.push(v[i]);
+            q.push(st.top());
+            st.pop();
+        }
+        while(n--)
+        {
+            q.push(q.front());
+            q.pop();
         }
         return q;
     }
